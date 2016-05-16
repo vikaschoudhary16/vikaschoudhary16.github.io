@@ -11,15 +11,15 @@ permalink:           /:year/:month/:day/:title/
 title:               'VikasChoudhary'
 name:                'Vikas Choudhary Blog'
 tagline:             'A blog about network virtualization and cloud'
-description:         'My blog about everything related to SDN, NFV, Virtualization and Cloud'
-url:                 http://VikasChoudhary.github.io
+description:         'My blog about everything related to OpenStack, SDN, NFV, Virtualization and Cloud'
+url:                 http://vikaschoudhary16.github.io
 baseurl:             /
 paginate:            5
 
 # About/contact
 author:
   name:              Vikas Choudhary
-  url:               https://VikasChoudhary.github.io
+  url:               https://vikasChoudhary16.github.io
   email:             choudharyvikas16@gmail.com
 
 # Custom vars
