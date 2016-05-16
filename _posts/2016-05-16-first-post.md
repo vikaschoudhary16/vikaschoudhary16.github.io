@@ -2,7 +2,7 @@
 layout: post
 author: gsagie
 title: Kuryr - Bringing Containers Networking to OpenStack Neutron
-date: 2016-05-16 16:25:06 -0700
+date: 2016-05-16 00:25:06 -0700
 categories:
 - SDN
 - Openstack
