@@ -1,0 +1,109 @@
+---
+layout: post
+author: gsagie
+title: Kuryr - Bringing Containers Networking to OpenStack Neutron
+date: 2016-05-16 16:25:06 -0700
+categories:
+- SDN
+- Openstack
+- Docker
+- Kuryr
+- Neutron
+tags:
+- OVS
+- OVN
+- OpenStack
+- Kuryr
+- Midonet
+- Docker
+---
+
+In this post i am going to introduce you with a very interesting project i am involved with, Project Kuryr,  which is part of OpenStack Neutron big stadium.
+
+First, you must be wondering what is the meaning of the name, Kuryr is named after the Czech word which means a courier.
+This is exactly what Kuryr is trying to be, it tries to bring containers and Docker networking specifically to use and leverage Neutron solutions and services for networking, and close the gap to make this happen.
+
+## What is the problem Kuryr is trying to solve ?
+
+OpenStack and Neutron are no longer the new kid in the block, Neutron has matured and its popularity in OpenStack deployments over nova-network is increasing, it has a very rich ecosystem of plugins and drivers which provide networking solutions and services (like LBaaS, VPNaaS and FWaaS).
+All of which implement the Neutron abstraction and hopefully can be interchange by the cloud deployers.
+
+What we noticed in regards to containers networking, and specifically in environments that are mixed for containers and OpenStack is that every networking solution tries to reinvent and enable networking for containers but this time with Docker API (or any other abstraction)
+OpenStack Magnum, for example, has to introduce an abstraction layer for different libnetwork drivers depending on the Container Orchestration Engine used. It would be ideal if Kuryr could be the default for Magnum COEs
+
+The idea behind Kuryr, is to be able to leverage the abstraction and all the hard work that was put in Neutron and its plugins and services and use that to provide production grade networking for containers use cases.
+Instead of each independent Neutron plugin or solution trying to find and close the gaps, we can concentrate the efforts and focus in one spot - Kuryr.
+
+Kuryr aims to be the “integration bridge” between the two communities, Docker and Neutron and propose and drive changes needed in Neutron (or in Docker) to be able to fulfill the use cases needed specifically to containers networking.
+
+It is important to note that Kuryr is NOT a networking solution by itself nor does it attempt to become one. The Kuryr effort is focused to be the courier that delivers Neutron networking and services to Docker.
+
+## Kuryr Architecture
+
+Kuryr has few parts which are already under working process and some which are being discussed and designed as i write these lines. 
+
+### Map Docker libnetwork to Neutron API
+
+The following diagram shows the basic concept of Kuryr architecture, to map between Docker and libnetwork networking model to Neutron API.
+
+<img src="https://raw.githubusercontent.com/GalSagie/GalSagie.github.io/master/public/img/kuryr1.jpg" />
+
+Kuryr maps libnetwork APIs and creates the appropriate objects in Neutron which means that every solution that implements Neutron API can now be used for containers networking.
+All the additional features that Neutron provides can then be applied to containers ports, for example security groups, NAT services and floating IP’s.
+
+But the potential of Kuryr doesn't stop in the core API and basic extensions, Kuryr can leverage the networking services and their features for Example LBaaS to provide abstraction for implementing Kubernetes services and so on.
+
+Kuryr is also going to close the gaps when API’s mapping is not very obvious and if needed drive changes in the Neutron community.
+Recent examples of this are the tags addition to Neutron resources, to allow API clients like Kuryr to store mapping data and port forwarding, to be able to provide port exposing Docker-style (Of course all of this is still in review and approval process)
+
+### Provide generic VIF-Binding infrastructure
+
+One of the common problems for Neutron solutions that want to support containers networking is that in these environments there is a lack of nova port binding infrastructure and no libvirt support.
+
+Kuryr tries to provide a generic VIF binding mechanism for the various port types which will receive from Docker the namespace end and attach it to the networking solution infrastructure depending on its type (or pass it to it to finalize the binding).
+
+You can read more about this work in the [following blueprint](https://blueprints.launchpad.net/kuryr/+spec/vif-binding-and-unbinding-mechanism)
+and also check review process for [Kuryr project here](https://review.openstack.org/#/q/status:open+project:openstack/kuryr,n,z)
+
+VIF binding is also needed for cases of running containers nested inside VM's which is described in the next sections.
+These VM's are not managed directly by nova and hence don't have any OpenStack agent in them, which means there needs to be some mechanism to perform the VIF binding and it can be initiated from the local Docker remote driver calling a shim Kuryr layer. (But once again this is something that is still being discussed)
+
+The following diagrams depicts the VIF Binding with Kuryr
+
+<img src="https://raw.githubusercontent.com/GalSagie/GalSagie.github.io/master/public/img/kuryr2.jpg" />
+
+### Provide containerized images of Neutron plugins and Kolla Integration
+
+Kuryr aims to provide containerized images of the various Neutron plugins which hopefully is integrated with kolla process as well.
+If you dont know what OpenStack Kolla project is about, [visit this link.](https://wiki.openstack.org/wiki/Kolla)
+
+This means that we will have various images for the various Neutron plugins like OVS L2 Agent, Midonet, OVN with the Kuryr layer.
+Kolla integration will bring the much needed ease of deployment that operators desire without losing control over inter service authentication nor configurability.
+
+### Nested VMs and Magnum use cases
+
+Another use case that Kuryr aims at solving is the common pattern of deploying containers on user owned OpenStack created VMs, i.e. VM-containers. This deployment pattern provides an extra layer of security to container deployments by separating the user owned container from the operations owned Nova Compute machine.
+
+This use case is also consumed by OpenStack Magnum, Magnum is an OpenStack API service developed by the OpenStack Containers Team making container orchestration engines such as Docker and Kubernetes available as first class resources in OpenStack.
+
+There are already Neutron plugins that support this use case and provide an elegant way to attach the nested containers into different logical networks than the network of the VM itself, and apply Neutron features on it, for example OVN.
+You can read more about this at my blog post about OVN and containers [here.](http://galsagie.github.io/sdn/openstack/ovs/2015/04/26/ovn-containers/)
+
+
+Kuryr aims to provide the missing parts to support such solutions, for example defining neutron port and attaching sub ports to it (done as part of the VLAN trunk VM’s blueprint which can be reviewed [here.](https://blueprints.launchpad.net/openstack/?searchtext=vlan-aware-vms))
+
+Using Kuryr, OVN and other Neutron vendors like MidoNet can leverage a common infrastructure to interact with Docker and keep their focus on implementing Neutron APIs and driving networking forward.
+
+
+I will dwell more on this topic on my next post regarding Kuryr progress as it's still early to discuss concrete details (This part in Kuryr is suppose to be in the next milestone).
+
+
+## Summary
+
+Kuryr mission in my eyes and i hope by now in yours too is very critical and important, there are some interesting challenges ahead and we welcome any contribution/feedback/help that you can provide :)
+
+Come and visit us in the weekly IRC meeting and share your ideas/comments.
+You can find details about our meeting time/place [here](http://eavesdrop.openstack.org/#Kuryr_Project_Meeting)
+
+Stay tuned for the next update on Kuryr...
+

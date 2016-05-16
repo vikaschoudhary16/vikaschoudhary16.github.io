@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Kuryr - Bringing Containers Networking to OpenStack Neutron &middot; VikasChoudhary
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.min.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p><img src="http://VikasChoudhary.github.io/public/img/my_image.jpg" alt="MyImage" width="200" height="200" /></p>
+    <p>My blog about everything related to SDN, NFV, Virtualization and Cloud</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about.html">About</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/archives/">Site Archives</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories.html">Post Categories</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags.html">Content Tags</a>
+        
+      
+    
+    
+  </nav>
+  
+   <div class="sidebar-item">
+    <p>
+      <a href="https://github.com/GalSagie"><i class="fa fa-github fa-3x"></i></a>
+      <a href="https://twitter.com/GalSagie"><i class="fa fa-twitter fa-3x"></i></a>
+      <a href="https://www.linkedin.com/pub/gal-sagie/14/1ab/577"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      <a href="http://VikasChoudhary.github.io/feed.xml"><i class="fa fa-rss fa-3x"></i></a>
+    </p>
+  </div>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">VikasChoudhary</a>
+            <small>A blog about network virtualization and cloud</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Kuryr - Bringing Containers Networking to OpenStack Neutron</h1>
+  <span class="post-date">17 May 2016</span>
+  <p>In this post i am going to introduce you with a very interesting project i am involved with, Project Kuryr,  which is part of OpenStack Neutron big stadium.</p>
+
+<p>First, you must be wondering what is the meaning of the name, Kuryr is named after the Czech word which means a courier.
+This is exactly what Kuryr is trying to be, it tries to bring containers and Docker networking specifically to use and leverage Neutron solutions and services for networking, and close the gap to make this happen.</p>
+
+<h2 id="what-is-the-problem-kuryr-is-trying-to-solve-">What is the problem Kuryr is trying to solve ?</h2>
+
+<p>OpenStack and Neutron are no longer the new kid in the block, Neutron has matured and its popularity in OpenStack deployments over nova-network is increasing, it has a very rich ecosystem of plugins and drivers which provide networking solutions and services (like LBaaS, VPNaaS and FWaaS).
+All of which implement the Neutron abstraction and hopefully can be interchange by the cloud deployers.</p>
+
+<p>What we noticed in regards to containers networking, and specifically in environments that are mixed for containers and OpenStack is that every networking solution tries to reinvent and enable networking for containers but this time with Docker API (or any other abstraction)
+OpenStack Magnum, for example, has to introduce an abstraction layer for different libnetwork drivers depending on the Container Orchestration Engine used. It would be ideal if Kuryr could be the default for Magnum COEs</p>
+
+<p>The idea behind Kuryr, is to be able to leverage the abstraction and all the hard work that was put in Neutron and its plugins and services and use that to provide production grade networking for containers use cases.
+Instead of each independent Neutron plugin or solution trying to find and close the gaps, we can concentrate the efforts and focus in one spot - Kuryr.</p>
+
+<p>Kuryr aims to be the “integration bridge” between the two communities, Docker and Neutron and propose and drive changes needed in Neutron (or in Docker) to be able to fulfill the use cases needed specifically to containers networking.</p>
+
+<p>It is important to note that Kuryr is NOT a networking solution by itself nor does it attempt to become one. The Kuryr effort is focused to be the courier that delivers Neutron networking and services to Docker.</p>
+
+<h2 id="kuryr-architecture">Kuryr Architecture</h2>
+
+<p>Kuryr has few parts which are already under working process and some which are being discussed and designed as i write these lines.</p>
+
+<h3 id="map-docker-libnetwork-to-neutron-api">Map Docker libnetwork to Neutron API</h3>
+
+<p>The following diagram shows the basic concept of Kuryr architecture, to map between Docker and libnetwork networking model to Neutron API.</p>
+
+<p><img src="https://raw.githubusercontent.com/GalSagie/GalSagie.github.io/master/public/img/kuryr1.jpg" /></p>
+
+<p>Kuryr maps libnetwork APIs and creates the appropriate objects in Neutron which means that every solution that implements Neutron API can now be used for containers networking.
+All the additional features that Neutron provides can then be applied to containers ports, for example security groups, NAT services and floating IP’s.</p>
+
+<p>But the potential of Kuryr doesn’t stop in the core API and basic extensions, Kuryr can leverage the networking services and their features for Example LBaaS to provide abstraction for implementing Kubernetes services and so on.</p>
+
+<p>Kuryr is also going to close the gaps when API’s mapping is not very obvious and if needed drive changes in the Neutron community.
+Recent examples of this are the tags addition to Neutron resources, to allow API clients like Kuryr to store mapping data and port forwarding, to be able to provide port exposing Docker-style (Of course all of this is still in review and approval process)</p>
+
+<h3 id="provide-generic-vif-binding-infrastructure">Provide generic VIF-Binding infrastructure</h3>
+
+<p>One of the common problems for Neutron solutions that want to support containers networking is that in these environments there is a lack of nova port binding infrastructure and no libvirt support.</p>
+
+<p>Kuryr tries to provide a generic VIF binding mechanism for the various port types which will receive from Docker the namespace end and attach it to the networking solution infrastructure depending on its type (or pass it to it to finalize the binding).</p>
+
+<p>You can read more about this work in the <a href="https://blueprints.launchpad.net/kuryr/+spec/vif-binding-and-unbinding-mechanism">following blueprint</a>
+and also check review process for <a href="https://review.openstack.org/#/q/status:open+project:openstack/kuryr,n,z">Kuryr project here</a></p>
+
+<p>VIF binding is also needed for cases of running containers nested inside VM’s which is described in the next sections.
+These VM’s are not managed directly by nova and hence don’t have any OpenStack agent in them, which means there needs to be some mechanism to perform the VIF binding and it can be initiated from the local Docker remote driver calling a shim Kuryr layer. (But once again this is something that is still being discussed)</p>
+
+<p>The following diagrams depicts the VIF Binding with Kuryr</p>
+
+<p><img src="https://raw.githubusercontent.com/GalSagie/GalSagie.github.io/master/public/img/kuryr2.jpg" /></p>
+
+<h3 id="provide-containerized-images-of-neutron-plugins-and-kolla-integration">Provide containerized images of Neutron plugins and Kolla Integration</h3>
+
+<p>Kuryr aims to provide containerized images of the various Neutron plugins which hopefully is integrated with kolla process as well.
+If you dont know what OpenStack Kolla project is about, <a href="https://wiki.openstack.org/wiki/Kolla">visit this link.</a></p>
+
+<p>This means that we will have various images for the various Neutron plugins like OVS L2 Agent, Midonet, OVN with the Kuryr layer.
+Kolla integration will bring the much needed ease of deployment that operators desire without losing control over inter service authentication nor configurability.</p>
+
+<h3 id="nested-vms-and-magnum-use-cases">Nested VMs and Magnum use cases</h3>
+
+<p>Another use case that Kuryr aims at solving is the common pattern of deploying containers on user owned OpenStack created VMs, i.e. VM-containers. This deployment pattern provides an extra layer of security to container deployments by separating the user owned container from the operations owned Nova Compute machine.</p>
+
+<p>This use case is also consumed by OpenStack Magnum, Magnum is an OpenStack API service developed by the OpenStack Containers Team making container orchestration engines such as Docker and Kubernetes available as first class resources in OpenStack.</p>
+
+<p>There are already Neutron plugins that support this use case and provide an elegant way to attach the nested containers into different logical networks than the network of the VM itself, and apply Neutron features on it, for example OVN.
+You can read more about this at my blog post about OVN and containers <a href="http://galsagie.github.io/sdn/openstack/ovs/2015/04/26/ovn-containers/">here.</a></p>
+
+<p>Kuryr aims to provide the missing parts to support such solutions, for example defining neutron port and attaching sub ports to it (done as part of the VLAN trunk VM’s blueprint which can be reviewed <a href="https://blueprints.launchpad.net/openstack/?searchtext=vlan-aware-vms">here.</a>)</p>
+
+<p>Using Kuryr, OVN and other Neutron vendors like MidoNet can leverage a common infrastructure to interact with Docker and keep their focus on implementing Neutron APIs and driving networking forward.</p>
+
+<p>I will dwell more on this topic on my next post regarding Kuryr progress as it’s still early to discuss concrete details (This part in Kuryr is suppose to be in the next milestone).</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Kuryr mission in my eyes and i hope by now in yours too is very critical and important, there are some interesting challenges ahead and we welcome any contribution/feedback/help that you can provide :)</p>
+
+<p>Come and visit us in the weekly IRC meeting and share your ideas/comments.
+You can find details about our meeting time/place <a href="http://eavesdrop.openstack.org/#Kuryr_Project_Meeting">here</a></p>
+
+<p>Stay tuned for the next update on Kuryr…</p>
+
+
+  <span class="post-date">Tags:
+    
+    
+
+
+  <a href="http://VikasChoudhary.github.io/tags/#Docker">Docker</a>
+  
+    &middot;
+  
+
+  <a href="http://VikasChoudhary.github.io/tags/#Kuryr">Kuryr</a>
+  
+    &middot;
+  
+
+  <a href="http://VikasChoudhary.github.io/tags/#Midonet">Midonet</a>
+  
+    &middot;
+  
+
+  <a href="http://VikasChoudhary.github.io/tags/#OVN">OVN</a>
+  
+    &middot;
+  
+
+  <a href="http://VikasChoudhary.github.io/tags/#OVS">OVS</a>
+  
+    &middot;
+  
+
+  <a href="http://VikasChoudhary.github.io/tags/#OpenStack">OpenStack</a>
+  
+
+
+
+  </span>
+  
+    <span class="post-date">
+    &larr; Previous Post: <a href="/2016/02/15/neutron-db-consistency/">Neutron DB Consistency</a></span>
+  
+  
+
+  <span class="post-sharing"><p>Be social and share this post!<br />
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=http://VikasChoudhary.github.io/2016/05/17/first-post/" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a> 
+<a href="https://twitter.com/intent/tweet?text=http://VikasChoudhary.github.io/2016/05/17/first-post/" title="Share on Twitter"><i class="fa fa-twitter-square fa-2x"></i></a> 
+<a href="https://plus.google.com/share?url=http://VikasChoudhary.github.io/2016/05/17/first-post/" title="Share on Google Plus"><i class="fa fa-google-plus-square fa-2x"></i></a></p></span>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="http://VikasChoudhary.github.io/2016/02/15/neutron-db-consistency/">
+            Neutron DB Consistency
+            <small>15 Feb 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'galsagie'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10238945; 
+var sc_invisible=0; 
+var sc_security="ea2d3a16"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="shopify visitor
+statistics" href="http://statcounter.com/shopify/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/10238945/0/ea2d3a16/0/"
+alt="shopify visitor statistics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide --> 
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

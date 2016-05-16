@@ -1,0 +1,26 @@
+# Dependencies
+markdown:            kramdown
+highlighter:         rouge
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           /:year/:month/:day/:title/
+
+# Setup
+title:               'VikasChoudhary'
+name:                'Vikas Choudhary Blog'
+tagline:             'A blog about network virtualization and cloud'
+description:         'My blog about everything related to SDN, NFV, Virtualization and Cloud'
+url:                 http://VikasChoudhary.github.io
+baseurl:             /
+paginate:            5
+
+# About/contact
+author:
+  name:              Vikas Choudhary
+  url:               https://VikasChoudhary.github.io
+  email:             choudharyvikas16@gmail.com
+
+# Custom vars
+version:             1.0.0
