@@ -389,10 +389,9 @@ round-trip min/avg/max/stddev = 0.265/1.391/2.661/0.983 ms
 root@1-ubuntu:/# 
 ~~~
 
-###There you go !!!!!! 
+There you go !!!!!! 
 
-###Pods on different nodes pinging each other over vxlan tunnels !!!
-
+Pods on different nodes pinging each other over vxlan tunnels !!!
 
 Vxlan tunnels created by neutron between nodes, responsible for overlaying pod traffic, can be seen using ovs-vsctl cmnds:
 
