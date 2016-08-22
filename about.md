@@ -21,6 +21,18 @@ aspects (Performance / Managment / Monitoring / Deployment).
 
 Learning new things every day and enjoying it, interesting times in the networking world.
 
+## Thanks
+
+I want to mention Gal Sagie, his professional blog and writing is what inspired me to write this blog, i am a regular visitor and reader and enjoying it.
+
+Thanks Gal, keep up the good work!
+
+(p.s. using Jekyll and Git Pages for this blog including this theme are also inspired from Gal :) )
+
+[Gal’s Blog](http://galsagie.github.io/)
+
+Hope you enjoy reading, and feel free to comment and send me feedbacks (gal.sagie at gmail dot com)
+
 Hope you enjoy reading, and feel free to comment and send me
 feedbacks (choudharyvikas16 at gmail dot com)
 

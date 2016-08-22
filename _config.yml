@@ -11,7 +11,7 @@ permalink:           /:year/:month/:day/:title/
 title:               'VikasChoudhary'
 name:                'Vikas Choudhary Blog'
 tagline:             'A blog about network virtualization and cloud'
-description:         'My blog about everything related to OpenStack, SDN, NFV, Virtualization and Cloud'
+description:         'My blog about everything related to Kubernetes, OpenStack, Containers, SDN, NFV, Virtualization and Cloud'
 url:                 http://vikaschoudhary16.github.io
 baseurl:             /
 paginate:            5
