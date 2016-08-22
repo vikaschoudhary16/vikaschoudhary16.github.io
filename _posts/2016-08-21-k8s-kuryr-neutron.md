@@ -389,7 +389,12 @@ round-trip min/avg/max/stddev = 0.265/1.391/2.661/0.983 ms
 root@1-ubuntu:/# 
 ~~~
 
-Vxlan tunnels created by neutron can be seen using ovs-vsctl cmnds:
+###There you go !!!!!! 
+
+###Pods on different nodes pinging each other over vxlan tunnels !!!
+
+
+Vxlan tunnels created by neutron between nodes, responsible for overlaying pod traffic, can be seen using ovs-vsctl cmnds:
 
 ~~~
 root@ubuntu-node:/usr/local/lib/python3.5/dist-packages# ovs-vsctl show
