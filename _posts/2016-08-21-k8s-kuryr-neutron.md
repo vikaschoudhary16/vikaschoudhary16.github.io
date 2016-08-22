@@ -50,7 +50,6 @@ All three machines are connected via a VirtualBox *host-only* network. For the s
 3. Kuryr Installation:
   * *raven* service installation on *fed-master*
   * Kuryr *cni driver* installation on *fed-node* and *fed-master*
-NOTE: Kuryr is under active development and changing very fast, I will try to keep updating this post.  
 
 ## OpenStack Installation
 
@@ -424,5 +423,4 @@ Please note that above is partial output only. Intention is to put focus on vxla
 
 Thats it !!!!!!!! :)
 
-Hope you enjoyed the post!!!
-
+Hope you enjoyed the post!!!  
