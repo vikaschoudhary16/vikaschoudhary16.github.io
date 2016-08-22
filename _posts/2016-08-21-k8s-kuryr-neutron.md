@@ -148,10 +148,10 @@ After successful installation *neutron agent-list* should show three OpenvSwitch
 
 ## Kubernetes Installation
 
-I refered [standard community guide](http://kubernetes.io/docs/getting-started-guides/fedora/fedora_manual_config/). Documentation does not seem to be up-to-date at few points and I was required to do some additional changes:
+I refered [standard community guide](http://kubernetes.io/docs/getting-started-guides/fedora/fedora_manual_config/). Documentation does not seem to be up-to-dated and I had to do few additional changes:
 
-1. To get *kubectl* working, modify ~/.kube/config to ensure that ‘server’ is pointing to api-server correctly.
-2. You might also need to do following steps to get pods created. Details [here](https://github.com/kubernetes/kubernetes/issues/11355#issuecomment-127378691):
+1. To get *kubectl* working, had to modify ~/.kube/config. *server* should be configure with api-server endpoint details.
+2. Had to do following steps to get pods created. Details [here](https://github.com/kubernetes/kubernetes/issues/11355#issuecomment-127378691):
   * Generate a signing key:
 
 	```
@@ -171,7 +171,7 @@ I refered [standard community guide](http://kubernetes.io/docs/getting-started-g
 	```
 
 
-As a validation step, run few commands on *fed-master*. If all is well output should look like:
+As a validation step, run few commands on *fed-master*. If all is well output should look like as shown:
 
 ~~~
 [root@fed-master ~]# kubectl get nodes
@@ -199,7 +199,7 @@ Kuryr supports Python3 only.
 
 ### Raven Installation, Configuration and Running
 
-There will be a single Raven service instance running on Kubernetes master node i.e *fed-master*
+There will be a single instance of Raven service running on Kubernetes master node i.e *fed-master*.
 
 ~~~
 [root@fed-master ~]# git clone https://github.com/midonet/kuryr/tree/k8s.git
@@ -222,7 +222,7 @@ export SERVICE_CLUSTER_IP_RANGE="10.254.0.0/16"
 [root@fed-master ~]#raven
 ~~~
 
-Now Raven is lisentening to all the events api-server is reporting.
+Now Raven is lisentening to all the events that api-server is reporting.
 
 ### CNI driver installation and configuration
 
@@ -237,7 +237,7 @@ These steps are to be performed on each of the nodes, *fed-node* and *ubuntu-nod
 [root@fed-master ~]# python3 setup.py install . 
 ~~~
 
-Verify that cni driver binary, *kuryr* got placed at expected path:
+Verify that cni driver binary, *kuryr*, got created at expected path:
 
 ~~~
 [root@fed-node cni]# ls /opt/cni/bin/
@@ -252,7 +252,7 @@ Create a network configuration file and directories as shown below:
 [root@fed-node cni]# 
 ~~~
 
-Now run the *kubelet* with *--network-lugin-dir* and *--network-plugin* options:
+Now run the *kubelet* with *--network-plugin-dir* and *--network-plugin* options:
 
 ~~~
 [root@fed-node kuryr]# /usr/bin/kubelet --logtostderr=true --v=4 --api-servers=http://fed-master:8080 --address=0.0.0.0 --network-plugin-dir=/etc/cni/net.d --network-plugin=cni --hostname-override=fed-node --allow-privileged=false
