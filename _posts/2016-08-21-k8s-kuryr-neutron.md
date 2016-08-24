@@ -203,7 +203,6 @@ There will be a single instance of Raven service running on Kubernetes master no
 ~~~
 [root@fed-master ~]# git clone https://github.com/midonet/kuryr/tree/k8s.git
 [root@fed-master ~]# cd kuryr
-[root@fed-master ~]# pip3 install -r requirements.txt
 [root@fed-master ~]#
 [root@fed-master ~]# pip3 install .
 [root@fed-master ~]#
