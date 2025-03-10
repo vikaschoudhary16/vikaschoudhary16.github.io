@@ -1,6 +1,6 @@
 ---
 title: Istio CNI Implementation in OpenShift
-date: 2025-03-10 12:00:00 +0000
+date: 2025-03-09 12:00:00 +0000
 categories: [Kubernetes, Networking]
 tags: [istio, openshift, cni, networking, service-mesh]
 author: Vikas Choudhary
