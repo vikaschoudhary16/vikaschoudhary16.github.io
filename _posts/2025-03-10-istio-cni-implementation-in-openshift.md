@@ -37,7 +37,7 @@ The CNI configuration can be generated in two formats:
 
 ## Diagram
 
-![Istio CNI Flow Diagram](/images/lib/istio-cni-diagram.png)
+![Istio CNI Flow Diagram](/assets/lib/istio-cni-diagram.png)
 
 ## Plugin Invocation Process
 
