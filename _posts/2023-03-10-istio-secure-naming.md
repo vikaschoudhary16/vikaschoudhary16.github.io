@@ -6,5 +6,5 @@ tags: [istio, security]
 author: Vikas Choudhary
 ---
 
-https://vikaschoudhary16.wordpress.com/2022/05/26/secure-naming-in-istio/
+[https://vikaschoudhary16.wordpress.com/2022/05/26/secure-naming-in-istio/](https://vikaschoudhary16.wordpress.com/2022/05/26/secure-naming-in-istio/)
 

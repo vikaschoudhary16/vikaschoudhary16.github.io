@@ -6,5 +6,5 @@ tags: [istio, security]
 author: Vikas Choudhary
 ---
 
-https://vikaschoudhary16.wordpress.com/2022/06/20/undeistio-permissive-authz-magic-2/
+[https://vikaschoudhary16.wordpress.com/2022/06/20/undeistio-permissive-authz-magic-2/](https://vikaschoudhary16.wordpress.com/2022/06/20/undeistio-permissive-authz-magic-2/)
 
