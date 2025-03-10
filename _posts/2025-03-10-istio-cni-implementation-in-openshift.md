@@ -98,6 +98,11 @@ We considered several approaches:
 2. **Setting hostAliases**:
    - Add static DNS resolution in pod specs and use excludeOutboundIPRanges
    - Rejected because it would require modifications to all application deployments
+**
+3. **Using k8s native sidecars for istio-proxy**
+   - If we look at real cause of the problem, it is because istio-proxy is not ready to handle the redirected traffic from the init containers.
+   - k8s native sidecars can solve this issue because then istio-proxy would be run as an ever running init container. You can read more [here](https://istio.io/latest/blog/2023/native-sidecars/)
+   - We could not go this path because customer was not at the minimum required k8s(openshift) version for native sidecar support.
 
 3. **Custom CNI Plugin Solution** (Selected Approach):
    - Develop a shell-based CNI plugin to add iptables rules skipping redirection for UID 1337
