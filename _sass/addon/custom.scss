@@ -1,0 +1,13 @@
+.mermaid {
+    width: 100%;
+    min-width: 600px;
+    max-width: 100%;
+    font-size: 16px; /* Increase font size */
+  }
+
+  @media (max-width: 768px) {
+    .mermaid {
+      min-width: 100%;
+      font-size: 14px; /* Slightly smaller on mobile but still readable */
+    }
+  }
