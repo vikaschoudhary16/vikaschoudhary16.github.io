@@ -145,7 +145,7 @@ spec:
         name: my-svc
         port: 80
 ```
-If you are a hands-on kind of person like me, then trying out istio integration test [TestSimpleHTTPSandwich](TestSimpleHTTPSandwich) can be a good starting point.
+If you are a hands-on kind of person like me, then trying out istio integration test [TestSimpleHTTPSandwich](https://github.com/istio/istio/blob/release-1.25/tests/integration/ambient/waypoint_test.go#L217) can be a good starting point.
 
 ## Conclusion
 
