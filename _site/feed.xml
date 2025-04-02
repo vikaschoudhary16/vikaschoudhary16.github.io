@@ -3,20 +3,162 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://localhost:4000/</id>
   <title>Vikas Choudhary</title>
-  <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-10T12:07:52+05:30</updated>
+  <subtitle>A blog about cloud networking and computing.</subtitle>
+  <updated>2025-04-02T16:59:08+05:30</updated>
   <author>
-    <name>your_full_name</name>
+    <name>Vikas Choudhary</name>
     <uri>http://localhost:4000/</uri>
   </author>
   <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2025 your_full_name </rights>
+  <rights> © 2025 Vikas Choudhary </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>BYO Waypoint in Istio Ambient Mode - Expanding Your Service Mesh Options</title>
+    <link href="http://localhost:4000/posts/byo-waypoint/" rel="alternate" type="text/html" title="BYO Waypoint in Istio Ambient Mode - Expanding Your Service Mesh Options" />
+    <published>2025-04-02T00:00:00+05:30</published>
+  
+    <updated>2025-04-02T00:00:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/byo-waypoint/</id>
+    <content type="text/html" src="http://localhost:4000/posts/byo-waypoint/" />
+    <author>
+      <name>Vikas Choudhary</name>
+    </author>
+
+  
+    
+    <category term="Kubernetes" />
+    
+    <category term="Networking" />
+    
+  
+
+  <summary>Introducing BYO Waypoint in Istio Ambient Mode
+
+Istio Ambient’s architecture continues to evolve with powerful new capabilities that enhance flexibility and integration options. One such capability is “Bring Your Own” (BYO) waypoint functionality, enabled through Ambient’s “sandwich mode” deployment model. This approach allows any Kubernetes Gateway API conformant proxy to be deployed as a wayp...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Enhancing Envoy's Local Rate Limiting with Dynamic Token Buckets</title>
+    <link href="http://localhost:4000/posts/dynamic-token-buckets/" rel="alternate" type="text/html" title="Enhancing Envoy&amp;apos;s Local Rate Limiting with Dynamic Token Buckets" />
+    <published>2025-03-10T17:30:00+05:30</published>
+  
+    <updated>2025-03-10T17:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/dynamic-token-buckets/</id>
+    <content type="text/html" src="http://localhost:4000/posts/dynamic-token-buckets/" />
+    <author>
+      <name>Vikas Choudhary</name>
+    </author>
+
+  
+    
+    <category term="Envoy" />
+    
+    <category term="Rate Limiting" />
+    
+  
+
+  <summary>Introduction
+
+Envoy Proxy has long offered powerful rate limiting capabilities to protect services from traffic spikes and ensure fair resource allocation. However, until recently, there was a significant limitation in how users could configure local rate limiting descriptors.
+
+While Envoy allowed flexible extraction of values from HTTP requests at runtime based on user configuration, the descr...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Istio CNI Implementation in OpenShift</title>
+    <link href="http://localhost:4000/posts/istio-cni-implementation-in-openshift/" rel="alternate" type="text/html" title="Istio CNI Implementation in OpenShift" />
+    <published>2025-03-09T17:30:00+05:30</published>
+  
+    <updated>2025-03-11T09:27:17+05:30</updated>
+  
+    <id>http://localhost:4000/posts/istio-cni-implementation-in-openshift/</id>
+    <content type="text/html" src="http://localhost:4000/posts/istio-cni-implementation-in-openshift/" />
+    <author>
+      <name>Vikas Choudhary</name>
+    </author>
+
+  
+    
+    <category term="Kubernetes" />
+    
+    <category term="Networking" />
+    
+  
+
+  <summary>Overview
+
+Istio CNI is a component of the Istio service mesh that modifies pod networking to transparently redirect traffic through the service mesh. In OpenShift environments, Istio CNI has specific configuration and operational aspects that differ from standard Kubernetes deployments.
+
+Components and Deployment
+
+Istio CNI is deployed as a daemonset named istio-cni-node. This daemonset runs on...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Istio MTLS Smartness Explained</title>
+    <link href="http://localhost:4000/posts/istio-mtls/" rel="alternate" type="text/html" title="Istio MTLS Smartness Explained" />
+    <published>2022-03-09T17:30:00+05:30</published>
+  
+    <updated>2025-03-11T09:27:17+05:30</updated>
+  
+    <id>http://localhost:4000/posts/istio-mtls/</id>
+    <content type="text/html" src="http://localhost:4000/posts/istio-mtls/" />
+    <author>
+      <name>Vikas Choudhary</name>
+    </author>
+
+  
+    
+    <category term="Kubernetes" />
+    
+    <category term="Networking" />
+    
+  
+
+  <summary>https://vikaschoudhary16.wordpress.com/2022/06/20/undeistio-permissive-authz-magic-2/</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Understanding Istio’s Secure Naming</title>
+    <link href="http://localhost:4000/posts/istio-secure-naming/" rel="alternate" type="text/html" title="Understanding Istio’s Secure Naming" />
+    <published>2022-03-09T17:30:00+05:30</published>
+  
+    <updated>2025-03-11T09:27:17+05:30</updated>
+  
+    <id>http://localhost:4000/posts/istio-secure-naming/</id>
+    <content type="text/html" src="http://localhost:4000/posts/istio-secure-naming/" />
+    <author>
+      <name>Vikas Choudhary</name>
+    </author>
+
+  
+    
+    <category term="Kubernetes" />
+    
+    <category term="Networking" />
+    
+  
+
+  <summary>https://vikaschoudhary16.wordpress.com/2022/05/26/secure-naming-in-istio/</summary>
+
+  </entry>
 
 </feed>
 
