@@ -7,7 +7,9 @@ tags: [istio, ambient, waypoint, envoy, service mesh, kubernetes]
 
 ## Introducing BYO Waypoint in Istio Ambient Mode
 
-Istio [Ambient](https://istio.io/latest/docs/ambient/overview/)'s architecture continues to evolve with powerful new capabilities that enhance flexibility and integration options. One such capability is "Bring Your Own" (BYO) waypoint functionality, enabled through Ambient's "sandwich mode" deployment model. This approach allows any Kubernetes Gateway API conformant proxy to be deployed as a waypoint, opening up new possibilities for extending your service mesh.
+Istio [Ambient](https://istio.io/latest/docs/ambient/overview/)'s architecture continues to evolve with powerful new capabilities that enhance flexibility and integration options. One significant advancement is the "Bring Your Own" (BYO) waypoint functionality, enabled through Ambient's innovative "sandwich mode" deployment model. This approach allows any Kubernetes Gateway API conformant proxy to be deployed as a waypoint, opening up new possibilities for extending your service mesh.
+
+Istio Ambient already supports BYO ingress functionality for north-south traffic (as covered in this [detailed guide](https://ambientmesh.io/docs/traffic/third-party-gateways/)). In this post, we'll explore how the same flexibility extends to east-west traffic through BYO waypoints, enabling enhanced service-to-service communication within the mesh.
 
 ## Understanding the Waypoint in Ambient Architecture
 
