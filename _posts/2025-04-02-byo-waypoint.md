@@ -38,7 +38,7 @@ _Sandwich Mode: Using Gateway Class for Waypoint_
 
 Key aspects of this architecture:
 
-1. The waypoint is deployed using ingress gateway class `istio` unlike istio-managed waypoint where `istio-waypoint` is used
+1. The waypoint is deployed using provider specific gateway class ex: `class-eg` or `class-nginx` etc unlike istio-managed waypoint where `istio-waypoint` is used
 2. It's labeled with `istio.io/dataplane-mode: ambient` to enable traffic capture, unlike istio-managed waypoint where waypoint traffic is not intercepted by ztunnel
 3. Server pods specify this non-istio gateway/waypoint as their waypoint using the usual `use-waypoint` label
 4. Traffic to this waypoint is intercepted by ztunnel, which terminates the HBONE connection and uses plaintext within the waypoint's network namespace. Please note because of ztunnel interception, we dont need to configure any mtls or HBONE at custom waypoint proxy.
@@ -92,12 +92,20 @@ Important: The integration between EnvoyGateway and Istio Ambient's waypoint fun
 
 To deploy a waypoint in "sandwich mode", you need to:
 
-1. Deploy a gateway using a standard gateway class (not `istio-waypoint`)
+1. Deploy a gateway using provider specific class (not `istio-waypoint`)
 2. Label it with `istio.io/dataplane-mode: ambient`
 3. Configure your workloads to use this gateway as their waypoint with appropriate labels
 4. Configure HTTPRoute or other gateway resources to define L7 routing and policies
 
 ```yaml
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway-class
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+---
 # Example Gateway in "sandwich mode"
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
@@ -107,7 +115,7 @@ metadata:
   labels:
     istio.io/dataplane-mode: ambient
 spec:
-  gatewayClassName: istio # Using standard gateway class
+  gatewayClassName: envoy-gateway-class # provider specific class name
   listeners:
   - allowedRoutes:
       namespaces:
