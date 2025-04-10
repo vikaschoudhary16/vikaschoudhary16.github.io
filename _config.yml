@@ -123,8 +123,8 @@ comments:
     repo_id: "R_kgDOOF-ghA"
     category: Announcements
     category_id: "DIC_kwDOOF-ghM4CnyET"
-    mapping: # optional, default to 'pathname'
-    strict: # optional, default to '0'
+    mapping: pathname
+    strict: '0'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
     reactions_enabled: # optional, default to the value of `1`
